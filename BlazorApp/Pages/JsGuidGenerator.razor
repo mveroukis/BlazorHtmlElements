@@ -2,11 +2,13 @@
 
 @using System.Diagnostics
 
+@implements IDisposable
+
 @inject IJSRuntime JsRuntime
 
 <h3>JavaScript GuidGenerator</h3>
 
-<p>Look in Visual Studio's <i>Output</i> window to see log messages genereted from your front-end code.</p>
+<p>Look in Visual Studio's <i>Output</i> window to see Debug messages genereted from your front-end code.</p>
 
 
 @code {
@@ -27,7 +29,11 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-
         await JsRuntime.InvokeVoidAsync("JsGuidGenerator.start", DotNetObjectReference.Create(this));
+    }
+
+    async void IDisposable.Dispose()
+    {
+        await JsRuntime.InvokeVoidAsync("JsGuidGenerator.stop", DotNetObjectReference.Create(this));
     }
 }
