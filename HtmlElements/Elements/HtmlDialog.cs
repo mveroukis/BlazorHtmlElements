@@ -10,8 +10,9 @@ namespace HtmlElements.Elements
     {
         private Func<string, Task> _asyncOnCloseAction = null;
 
-        internal HtmlDialog(IJSRuntime jsRuntime, ElementReference element) : base(jsRuntime, element)
+        internal HtmlDialog(IJSRuntime jsRuntime, ElementReference element, Func<string, Task> action = null) : base(jsRuntime, element)
         {
+            SetAsyncOnCloseAction(action);
         }
 
         protected override string JsNamespace => "interop.dialog.";

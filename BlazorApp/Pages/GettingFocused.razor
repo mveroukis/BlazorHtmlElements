@@ -1,0 +1,18 @@
+﻿@page "/gettingfocused"
+
+@inject IJSRuntime JsRuntime
+
+<h3>Getting Focused</h3>
+
+<button @onclick="OnButtonClicked">Focus Me</button>
+
+<input @ref="_inputRef" />
+
+@code {
+    private ElementReference _inputRef;
+
+    public async Task OnButtonClicked()
+    {
+        await JsRuntime.InvokeVoidAsync("setFocus", _inputRef);
+    }
+}

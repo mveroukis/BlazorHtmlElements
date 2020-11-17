@@ -19,7 +19,6 @@
     dialog: {
         init: (dialog, ref) => {
             dialog.addEventListener("close", async e => {
-                // 👇 Call the C# method from JavaScript
                 await ref.invokeMethodAsync("OnCloseAsync", dialog.returnValue);
             });
         },

@@ -1,0 +1,15 @@
+﻿@page "/simpleinteropcall"
+
+@inject IJSRuntime JsRuntime
+
+<h3>Simple Interop Call</h3>
+
+<button @onclick="OnButtonClicked">Alert Me</button>
+
+@code {
+    async Task OnButtonClicked()
+    {
+        await JsRuntime.InvokeVoidAsync("console.log", "C# says hello");
+        await JsRuntime.InvokeVoidAsync("alert", "C# says hello");
+    }
+}

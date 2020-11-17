@@ -7,12 +7,12 @@ namespace HtmlElements
 {
     public static class JSRuntimeExtensions
     {
-        public static Task<HtmlWindow> CreateWindowAsync(this IJSRuntime jsRuntime)
+        public static Task<HtmlWindow> BindToWindowAsync(this IJSRuntime jsRuntime)
         {
             return Task.FromResult(new HtmlWindow(jsRuntime));
         }
 
-        public static async Task<HtmlDialog> CreateDialogAsync(this IJSRuntime jsRuntime, ElementReference element)
+        public static async Task<HtmlDialog> BindToDialogAsync(this IJSRuntime jsRuntime, ElementReference element)
         {
             var dialog = new HtmlDialog(jsRuntime, element);
             await dialog.InitializeAsync();

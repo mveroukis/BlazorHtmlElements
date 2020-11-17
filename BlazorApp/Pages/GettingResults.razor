@@ -1,0 +1,16 @@
+﻿@page "/gettingresults"
+
+@inject IJSRuntime JsRuntime
+
+<h3>Getting Results</h3>
+
+<button @onclick="OnButtonClicked">Prompt Me</button>
+
+@code {
+    public async Task OnButtonClicked()
+    {
+        var favoriteMovie = await JsRuntime.InvokeAsync<string>("prompt", "What is your favorite movie?");
+
+        await JsRuntime.InvokeVoidAsync("alert", favoriteMovie);
+    }
+}

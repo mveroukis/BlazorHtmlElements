@@ -1,0 +1,33 @@
+﻿@page "/jsguidgenerator"
+
+@using System.Diagnostics
+
+@inject IJSRuntime JsRuntime
+
+<h3>JavaScript GuidGenerator</h3>
+
+<p>Look in Visual Studio's <i>Output</i> window to see log messages genereted from your front-end code.</p>
+
+
+@code {
+    [JSInvokable]
+    public Task<string> GenerateGuid()
+    {
+        return Task.FromResult(Guid.NewGuid().ToString());
+    }
+
+    [JSInvokable]
+    public static Task DebugLog(string msg)
+    {
+        Debug.WriteLine(msg);
+
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await JsRuntime.InvokeVoidAsync("JsGuidGenerator.start", DotNetObjectReference.Create(this));
+    }
+}
