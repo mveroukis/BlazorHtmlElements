@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp", "BlazorApp\BlazorApp.csproj", "{65D179B9-CF84-4A1B-8880-57073697366E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AE325822-FAC1-4C3B-8A95-C0BCDDCD8759} = {AE325822-FAC1-4C3B-8A95-C0BCDDCD8759}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlElements", "HtmlElements\HtmlElements.csproj", "{AE325822-FAC1-4C3B-8A95-C0BCDDCD8759}"
 EndProject

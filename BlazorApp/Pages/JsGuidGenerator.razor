@@ -8,10 +8,20 @@
 
 <h3>JavaScript GuidGenerator</h3>
 
-<p>Look in Visual Studio's <i>Output</i> window to see Debug messages genereted from your front-end code.</p>
+<p>
+    Look in Visual Studio's <i>Output</i> window to see Debug
+    messages genereted from your front-end code.
+</p>
 
 
 @code {
+    private readonly DotNetObjectReference<JsGuidGenerator> _objeRef;
+
+    public JsGuidGenerator()
+    {
+        _objeRef = DotNetObjectReference.Create(this);
+    }
+
     [JSInvokable]
     public Task<string> GenerateGuid()
     {
@@ -29,11 +39,13 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        await JsRuntime.InvokeVoidAsync("JsGuidGenerator.start", DotNetObjectReference.Create(this));
+        await JsRuntime.InvokeVoidAsync("JsGuidGenerator.start", _objeRef);
     }
 
     async void IDisposable.Dispose()
     {
-        await JsRuntime.InvokeVoidAsync("JsGuidGenerator.stop", DotNetObjectReference.Create(this));
+        await JsRuntime.InvokeVoidAsync("JsGuidGenerator.stop", _objeRef);
+
+        _objeRef.Dispose();
     }
 }
