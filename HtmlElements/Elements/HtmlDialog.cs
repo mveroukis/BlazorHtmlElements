@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HtmlElements.Elements
 {
-    public class HtmlDialog : HtmlElement, IAsyncInitialize
+    public class HtmlDialog : HtmlReferencedElement, IAsyncInitialize
     {
         private Func<string, Task> _asyncOnCloseAction = null;
 
@@ -44,7 +44,10 @@ namespace HtmlElements.Elements
         [JSInvokable]
         public async Task OnCloseAsync(string returnValue)
         {
-            await _asyncOnCloseAction?.Invoke(returnValue);
+            if (_asyncOnCloseAction != null)
+            {
+                await _asyncOnCloseAction.Invoke(returnValue);
+            }
 
             Debug.WriteLine($"Called from JS: {returnValue}");
         }
